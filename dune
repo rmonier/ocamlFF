@@ -1,0 +1,3 @@
+(executable
+  (name ocamlff)
+    (public_name ocamlff.exe))
