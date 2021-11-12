@@ -1,6 +1,9 @@
 {
     "esy": {
-      "build": "dune build -p ocamlff"
+      "build": "dune build -p ftest",
+      "scripts": {
+        
+      }
     },
     "dependencies": {
       "ocaml": "4.12.x",
