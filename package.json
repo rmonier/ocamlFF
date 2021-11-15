@@ -1,9 +1,9 @@
 {
     "esy": {
-      "build": "dune build -p ftest",
-      "scripts": {
-        
-      }
+      "build": "dune build -p ftest"
+    },
+    "scripts": {
+      "use-graph": "esy x ftest graph1 1 2 build/out"
     },
     "dependencies": {
       "ocaml": "4.12.x",
