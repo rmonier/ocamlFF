@@ -8,4 +8,8 @@ let gmap gr f =
         e_fold gr arcs gr2
 ;;
 
-let add_arc = assert false ;;
+let add_arc (g: int graph) id1 id2 n = 
+    match find_arc g id1 id2 with
+    | Some x -> new_arc g id1 id2 (x + n)
+    | None -> new_arc g id1 id2 n
+;;
