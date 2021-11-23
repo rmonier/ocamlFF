@@ -112,3 +112,22 @@ let from_file path =
   close_in infile ;
   final_graph
   
+let export gr path =
+
+  (* Open a write-file. *)
+  let ff = open_out path in
+
+    (* Write in this file. *)
+    (* node [shape = doublecircle]; 0 3 4 8;\n\t *)
+    fprintf ff "digraph finite_state_machine {
+    rankdir=LR;
+    size=\"8,5\"
+    node [shape = circle];\n";
+
+    (* Write all nodes by iterating on the arcs *)
+    e_iter gr (fun id1 id2 lbl -> fprintf ff "\t%d -> %d [label = \"%s\"];\n" id1 id2 lbl) ;
+  
+    fprintf ff "}";
+    close_out ff ;
+  ()
+;;

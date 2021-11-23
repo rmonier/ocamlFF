@@ -3,10 +3,12 @@
       "build": "dune build -p ftest"
     },
     "scripts": {
-      "test-basics": "esy x ftest graph1.txt 1 2 build/out"
+      "test-basics": "esy x ftest graph1.txt 1 2 build/out",
+      "produce-svg": "dot -Tsvg build/out.dot -o build/out.dot.svg"
     },
     "dependencies": {
       "ocaml": "4.12.x",
-      "@opam/dune": "*"
+      "@opam/dune": "*",
+      "@opam/conf-graphviz": "0.1"
     }
 }

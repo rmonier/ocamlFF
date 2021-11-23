@@ -35,5 +35,6 @@ let () =
             let graph6 = gmap graph5 string_of_int in
   (* Rewrite the graph that has been read. *)
   let () = write_file outfile graph6 in
+  let () = export graph (outfile ^ ".dot") in
   ()
 ;;
