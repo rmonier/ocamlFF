@@ -1,5 +1,5 @@
 {
-  "checksum": "191fd7fb1109a6392afc80d445f94827",
+  "checksum": "ae07a5466f7d60b2c4ed361466a63b8c",
   "root": "PROJET@link-dev:./package.json",
   "node": {
     "ocaml@4.12.0@d41d8cd9": {
@@ -27,7 +27,8 @@
       },
       "overrides": [],
       "dependencies": [
-        "ocaml@4.12.0@d41d8cd9", "@opam/dune@opam:2.9.1@1e504822"
+        "ocaml@4.12.0@d41d8cd9", "@opam/dune@opam:2.9.1@1e504822",
+        "@opam/conf-graphviz@opam:0.1@877d45a8"
       ],
       "devDependencies": []
     },
@@ -57,6 +58,43 @@
         "ocaml@4.12.0@d41d8cd9", "@opam/base-unix@opam:base@87d0b2eb",
         "@opam/base-threads@opam:base@36803084"
       ]
+    },
+    "@opam/conf-which@opam:1@f2a4f9c4": {
+      "id": "@opam/conf-which@opam:1@f2a4f9c4",
+      "name": "@opam/conf-which",
+      "version": "opam:1",
+      "source": {
+        "type": "install",
+        "source": [ "no-source:" ],
+        "opam": {
+          "name": "conf-which",
+          "version": "1",
+          "path": "esy.lock/opam/conf-which.1"
+        }
+      },
+      "overrides": [],
+      "dependencies": [ "@esy-ocaml/substs@0.0.1@d41d8cd9" ],
+      "devDependencies": []
+    },
+    "@opam/conf-graphviz@opam:0.1@877d45a8": {
+      "id": "@opam/conf-graphviz@opam:0.1@877d45a8",
+      "name": "@opam/conf-graphviz",
+      "version": "opam:0.1",
+      "source": {
+        "type": "install",
+        "source": [ "no-source:" ],
+        "opam": {
+          "name": "conf-graphviz",
+          "version": "0.1",
+          "path": "esy.lock/opam/conf-graphviz.0.1"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "@opam/conf-which@opam:1@f2a4f9c4",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": []
     },
     "@opam/base-unix@opam:base@87d0b2eb": {
       "id": "@opam/base-unix@opam:base@87d0b2eb",
