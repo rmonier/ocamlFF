@@ -1,5 +1,7 @@
 open Gfile
 open Tools
+open Fordfulk
+open Printf
 
 let () =
 
@@ -26,15 +28,36 @@ let () =
   and _sink = int_of_string Sys.argv.(3)
   in
 
-  (* Open file *)
-  let graph = from_file infile in
-    let graph2 = clone_nodes graph in
-      let graph3 = gmap graph2 int_of_string in
-        let graph4 = add_arc graph3 _source _sink 10 in
-          let graph5 = add_arc graph4 _source _sink 10 in
-            let graph6 = gmap graph5 string_of_int in
-  (* Rewrite the graph that has been read. *)
-  let () = write_file outfile graph6 in
-  let () = export graph (outfile ^ ".dot") in
+(*
+  (* TESTS -------------------- *)
+
+    (* Open file and test basics*)
+    let graph = from_file infile in
+      let graph2 = clone_nodes graph in
+        let graph3 = gmap graph2 int_of_string in
+          let graph4 = add_arc graph3 _source _sink 10 in
+            let graph5 = add_arc graph4 _source _sink 10 in
+              let graph6 = gmap graph5 string_of_int in
+                (* Rewrite the graph that has been read. *)
+                let () = write_file outfile graph6 in
+                  let () = export graph (outfile ^ ".dot") in
+  (* ----------------------------- *)
+*)
+
+  (* FORD FULKERSON -------------- *)
+
+  (* PATH CREATION *)
+
+    let graph = from_file infile in (* open graph *)
+    (*let pathOfArcs = match path graph _source _sink with: Some x -> x | None -> Raise NoPath in (* create path of arcs *)*)
+    let graph2 = gmap graph int_of_string in
+      let pathOfArcs = path graph2 _source _sink in
+      let () = List.iter (printf "%d ") pathOfArcs in
+        let graphPath = graph_from_path graph2 pathOfArcs in (* create graph from path of arcs *)
+          let graph3 = gmap graphPath string_of_int in
+            let () = write_file outfile graph3 in (* write graph in outfile *)
+              let () = export graph3 (outfile ^ ".dot") in (* write graph in dot file *)
+
+  (* ----------------------------- *)
   ()
 ;;
