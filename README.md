@@ -2,15 +2,15 @@
 
 ## How to use
 
-1) Install NPM.
+1) Install [NPM](https://nodejs.org/en/download/).
 
-2) Install Esy with `npm install -g esy`.
+2) Install [Esy](https://esy.sh/) with `npm install -g esy`.
 
 3) Install [Graphviz](http://www.graphviz.org/download/) to be able to use the `dot` command in order to generate SVG graphs.
 
 4) Install dependencies in the project root with the command : `esy`.
 
-Execute with `esy x ftest`.
+Execute with `esy x ftest`. You can also use the demo script which uses default parameters with `esy fordfulk` and produce its SVG with `esy produce-svg-path`.
 
 You can test all the basics functions by executing `esy test-basics`.
 

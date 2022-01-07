@@ -46,17 +46,13 @@ let () =
 
   (* FORD FULKERSON -------------- *)
 
-  (* PATH CREATION *)
-
-    let graph = from_file infile in (* open graph *)
-    (*let pathOfArcs = match path graph _source _sink with: Some x -> x | None -> Raise NoPath in (* create path of arcs *)*)
-    let graph2 = gmap graph int_of_string in
-      let pathOfArcs = path graph2 _source _sink in
-      let () = List.iter (printf "%d ") pathOfArcs in
-        let graphPath = graph_from_path graph2 pathOfArcs in (* create graph from path of arcs *)
-          let graph3 = gmap graphPath string_of_int in
-            let () = write_file outfile graph3 in (* write graph in outfile *)
-              let () = export graph3 (outfile ^ ".dot") in (* write graph in dot file *)
+    let graph_str_in = from_file infile in (* open graph *)
+      let graph_int_in = gmap graph_str_in int_of_string in (* convert graph labels to int *)
+        let pathOfArcs = path graph_int_in _source _sink in
+          let graph_int_out = residual_graph graph_int_in pathOfArcs (find_augmentation graph_int_in pathOfArcs) in (* get the integer out graph *)
+            let graph_str_out = gmap graph_int_out string_of_int in (* convert the graph labels to string *)
+              let () = write_file outfile graph_str_out in (* write graph in outfile *)
+                let () = export graph_str_out (outfile ^ ".dot") in (* write graph in dot file *)
 
   (* ----------------------------- *)
   ()

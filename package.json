@@ -5,12 +5,11 @@
     "scripts": {
       "test-basics": "esy x ftest graph1.txt 1 2 build/out-res",
       "produce-svg-res": "dot -Tsvg build/out-res.dot -o build/out-res.dot.svg",
-      "fordfulk": "esy x ftest graph3.txt 0 7 build/out-path",
+      "fordfulk": "esy x ftest graph4.txt 0 3 build/out-path",
       "produce-svg-path": "dot -Tsvg build/out-path.dot -o build/out-path.dot.svg"
     },
     "dependencies": {
       "ocaml": "4.13.x",
-      "@opam/dune": "*",
-      "@opam/conf-graphviz": "0.1"
+      "@opam/dune": "*"
     }
 }
