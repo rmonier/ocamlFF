@@ -9,7 +9,7 @@
       "produce-svg-path": "dot -Tsvg build/out-path.dot -o build/out-path.dot.svg"
     },
     "dependencies": {
-      "ocaml": "4.12.x",
+      "ocaml": "4.13.x",
       "@opam/dune": "*",
       "@opam/conf-graphviz": "0.1"
     }
