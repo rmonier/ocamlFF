@@ -8,7 +8,7 @@
       "fordfulk": "esy x ftest.exe graph4.txt 0 3 build/out-path",
       "produce-svg-path": "dot -Tsvg build/out-path.dot -o build/out-path.dot.svg"
     },
-    "dependencies": {
+    "devDependencies": {
       "ocaml": "4.13.x",
       "@opam/dune": "*"
     }

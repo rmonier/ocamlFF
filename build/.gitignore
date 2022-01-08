@@ -1,0 +1,4 @@
+# Ignore everything in this directory (whoops logs)
+*
+# Except this file
+!.gitignore
