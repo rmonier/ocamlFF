@@ -24,6 +24,9 @@ jobs:
       
     - name: Install dependencies and build with Esy
       run: esy
+      
+    - name: Rename binary
+      run: git mv _build/default/ftest.exe _build/default/fordfulkerson-"$RUNNER_OS".exe
     
     - name: Upload binary
       uses: softprops/action-gh-release@v1
