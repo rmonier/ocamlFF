@@ -21,3 +21,7 @@ You can find the binary file compiled for your OS in `_build/default`. You can t
 You can then generate your own graphs using this website : https://algorithms.discrete.ma.tum.de/graph-algorithms/flow-ford-fulkerson/index_en.html
 
 Download the TXT and use it as the input file.
+
+## What is working
+
+The Minimal Acceptable Project : The Ford Fulkerson algorithm is able to run and to resolve several examples of graphs.
