@@ -12,15 +12,11 @@
 
 4) Install dependencies in the project root with the command : `esy`.
 
-Execute with `esy x ftest.exe`. You can also use the demo script which uses default parameters with `esy fordfulk` and produce its SVG with `esy produce-svg-path`.
-
-You can test all the basics functions by executing `esy test-basics`.
-
-You can test the SVG producer after the execution of the basics by executing `esy produce-svg`.
+Execute with `esy x ftest.exe`. You can also use the demo script which uses default parameters with `esy fordfulk` and produce its SVG with `esy produce-svg`.
 
 ## Executable
 
-You can find the location of the binary file compiled for your OS by typing `esy echo '#{self.install}'`. You can then copy it wherever you want and use it independently.
+You can find the binary file compiled for your OS in `_build/default`. You can then copy it wherever you want and use it independently.
 
 You can then generate your own graphs using this website : https://algorithms.discrete.ma.tum.de/graph-algorithms/flow-ford-fulkerson/index_en.html
 
