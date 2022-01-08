@@ -26,7 +26,7 @@ jobs:
       run: esy
       
     - name: Rename binary
-      run: git mv _build/default/ftest.exe _build/default/fordfulkerson-${{ runner.os }}.exe
+      run: mv _build/default/ftest.exe _build/default/fordfulkerson-${{ runner.os }}.exe
     
     - name: Upload binary
       uses: softprops/action-gh-release@v1
