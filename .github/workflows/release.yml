@@ -22,19 +22,13 @@ jobs:
     - name: Set up Esy
       run: npm install -g esy
       
-    - name: Install dependencies with Esy
+    - name: Install dependencies and build with Esy
       run: esy
-      
-    - name: Build binary with Esy
-      run: esy b
-      
-    - name: Get binary path
-      run: echo "ESY_BINARY_PATH=$(esy echo '#{self.install}/bin/*.exe')" >> $GITHUB_ENV
-      
+    
     - name: Upload binary
       uses: softprops/action-gh-release@v1
       with: 
-        files: ${{ env.ESY_BINARY_PATH }}
+        files: _build/install/default/bin/*.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
