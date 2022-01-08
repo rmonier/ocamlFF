@@ -10,8 +10,6 @@ let rec path (gr : int graph) src dest =
         match arcs with
         | [] -> chemin
         | (id, lbl)::rst ->
-            Printf.printf "id %d \n" id ;
-            List.iter (Printf.printf "chemin in loop: %d\n") chemin;
             if id=dest && lbl > 0 then
                 (chemin@[src])@[id]
             else if not (List.mem id visited) && lbl > 0 then (
@@ -25,30 +23,6 @@ let rec path (gr : int graph) src dest =
     in
     parcours_out_arcs gr src (out_arcs gr src) [] []
 ;;
-
-
-(*let rec path (gr: int graph) src dest =
-	let rec parcours_out_arcs gr src arcs visited =
-		match arcs with
-		| [] -> []
-		| (id, lbl)::rst ->
-		if id=dest && lbl > 0 then
-			[src; id]
-		else if lbl > 0 then
-			if not (List.mem id visited) then
-				match parcours_out_arcs gr id (out_arcs gr id) (visited@[id]) with
-				| [] -> parcours_out_arcs gr src rst visited
-				| l -> src::l
-			else
-				parcours_out_arcs gr src rst visited
-		else if lbl <= 0 then
-			parcours_out_arcs gr src rst visited
-		else
-			[]
-	in
-	parcours_out_arcs gr src (out_arcs gr src) []
-;;
-*)
 
 let rec find_augmentation (gr:int graph) path =
     let rec aux gr path acu =
@@ -127,7 +101,9 @@ let resolve_ff c_gr src snk =
             match pathOfArcs with
             | [] -> fl (* si plus de path on a fini, on renvoit le nouveau graphe *)
             | _ -> (* sinon on soustrait le minimum à chaque label du path obtenu pour créer le graphe de sortie *)
-                let fl_gr = update_flow fl pathOfArcs (find_augmentation gr pathOfArcs) in
+                let augm = find_augmentation gr pathOfArcs in
+                let () = Printf.printf "augm=%d\n" augm in
+                let fl_gr = update_flow fl pathOfArcs augm in
                 aux (residual_graph gr fl_gr pathOfArcs) fl_gr src snk
         )
     in
