@@ -33,22 +33,47 @@ let rec find_augmentation (gr:int graph) path =
     aux gr path (-1)
 ;;
 
-(* changer, doit être fait a partir du flot *)
-let rec residual_graph c_gr path augm =
-    let aux gr id1 id2 x =
-        add_arc gr id2 id1 (-x)
-        (*add_arc gr id1 id2 x*)
+(*let rec residual_graph c_gr path augm =
+    let rec forward gr path x =
+        match path with
+        | hd::sec::rst -> residual_graph (add_arc gr hd sec (x)) (sec::rst) augm
+        | _ -> gr
     in
-    match List.rev path with
-    | hd::sec::rst -> add_arc (aux c_gr hd sec augm) hd sec augm
-    | _ -> c_gr
+    let rec backward gr path x =
+        match List.rev path with
+        | hd::sec::rst -> residual_graph (add_arc gr hd sec (-x)) (sec::rst) augm
+        | _ -> gr
+    in
+    backward (forward c_gr path augm) path augm
+;;*)
+
+let residual_graph c_gr f_gr path =
+    let rec forward c f path =
+        match path with
+        | hd::sec::rst -> (match find_arc f hd sec with
+                            | Some x -> forward (add_arc c hd sec (-x)) f (sec::rst)
+                            | _ -> c)
+        | _ -> c        
+    in
+    let rec backward c f path =
+        match path with
+        | hd::sec::rst -> (match find_arc f hd sec with
+                            | Some x -> backward (add_arc c sec hd x) f (sec::rst)
+                            | _ -> c)
+        | _ -> c
+    in
+    backward (forward c_gr f_gr path) f_gr path
 ;;
 
-let update_flow f_gr path augm =
+let empty_flow_graph (c_gr:int graph) =
+    gmap c_gr (fun x -> 0)
+;;
+
+let rec update_flow f_gr path augm =
     match path with
     | hd::sec::rst -> if find_arc f_gr hd sec != None 
-    then add_arc f_gr hd sec augm
-    else add_arc f_gr sec hd (-augm)
+    then update_flow (add_arc f_gr hd sec augm) (sec::rst) augm
+    else update_flow (add_arc f_gr sec hd (-augm)) (sec::rst) augm
     | _ -> f_gr
 ;;
 
@@ -61,6 +86,16 @@ steps:
         - mettre a jour le graphe de capacité/residuel
         
 *)
+
+let resolve_ff c_gr src snk =
+    let rec aux gr fl src snk =
+        let pathOfArcs = path gr src snk in
+        match pathOfArcs with
+        | [] -> fl
+        | _ -> aux (residual_graph gr (update_flow fl pathOfArcs (find_augmentation gr pathOfArcs)) pathOfArcs) (update_flow fl pathOfArcs (find_augmentation gr pathOfArcs)) src snk
+    in
+    aux c_gr (empty_flow_graph c_gr) src snk
+;;
 
 (* FIXME: with functions above *)
 (*

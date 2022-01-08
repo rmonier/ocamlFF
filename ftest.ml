@@ -47,12 +47,19 @@ let () =
   (* FORD FULKERSON -------------- *)
 
     let graph_str_in = from_file infile in (* open graph *)
-      let graph_int_in = gmap graph_str_in int_of_string in (* convert graph labels to int *)
-        let pathOfArcs = path graph_int_in _source _sink in
-          let graph_int_out = residual_graph graph_int_in pathOfArcs (find_augmentation graph_int_in pathOfArcs) in (* get the integer out graph *)
-            let graph_str_out = gmap graph_int_out string_of_int in (* convert the graph labels to string *)
-              let () = write_file outfile graph_str_out in (* write graph in outfile *)
-                let () = export graph_str_out (outfile ^ ".dot") in (* write graph in dot file *)
+    let graph_int_in = gmap graph_str_in int_of_string in (* convert graph labels to int *)
+    (*let pathOfArcs = path graph_int_in _source _sink in*)
+    (*let () = List.iter (Printf.printf "path : %d\n") pathOfArcs in
+    let () = Printf.printf "augm=%d\n" (find_augmentation graph_int_in pathOfArcs) in
+    let augm = find_augmentation graph_int_in pathOfArcs in
+    let flow_graph = update_flow (empty_flow_graph graph_int_in) pathOfArcs augm in
+    let graph_int_out = residual_graph graph_int_in flow_graph pathOfArcs in*)
+      (*let graph_int_out = residual_graph graph_int_in (empty_flow_graph graph_int_in) pathOfArcs in*) (* get the integer out graph *)
+        (*let graph_int_out = empty_flow_graph graph_int_in in*)
+    let graph_int_out = resolve_ff graph_int_in _source _sink in
+    let graph_str_out = gmap graph_int_out string_of_int in (* convert the graph labels to string *)
+    let () = write_file outfile graph_str_out in (* write graph in outfile *)
+    let () = export graph_str_out (outfile ^ ".dot") in (* write graph in dot file *)
 
   (* ----------------------------- *)
   ()
